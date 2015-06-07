@@ -15,10 +15,10 @@ BasicGame.Game.prototype = {
 
   create: function() {
 
-    // game.scale.pageAlignHorizontally = true;
-    // game.scale.pageAlignVertically = true;
-    // game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    // game.scale.setScreenSize(true);
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.setScreenSize(true);
 
     player = this.add.sprite(160,240,"player");
     player.anchor.setTo(0.5);
