@@ -100,7 +100,7 @@ BasicGame.Game.prototype = {
     this.ball = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ball');
     this.ball.anchor.setTo(0.5);
     this.physics.p2.enable(this.ball);
-    this.ball.body.setCircle(16);
+    this.ball.body.setCircle(8);
     this.ball.body.setMaterial(spriteMaterial);
 
     var self = this;
