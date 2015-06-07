@@ -29,6 +29,9 @@ BasicGame.Preload.prototype = {
     this.load.image('ring-4', 'res/ring-4.png');
     this.load.image('ring-5', 'res/ring-5.png');
 
+    this.load.image('start', 'res/start.png');
+    this.load.image('start-empty', 'res/start-empty.png');
+
     this.load.physics('physicsData', 'res/sprites.json');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
@@ -44,8 +47,7 @@ BasicGame.Preload.prototype = {
   update: function() {
 
     if (this.ready) {
-      // this.state.start('Menu');
-      this.state.start('Game');
+      this.state.start('Menu');
     }
 
   },

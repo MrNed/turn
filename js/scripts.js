@@ -53,49 +53,51 @@ BasicGame.Game.prototype = {
 
     this.physics.p2.setWorldMaterial(worldMaterial);
 
-    this.ring1 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-1');
-    this.ring1.anchor.setTo(0.5);
-    this.physics.p2.enable(this.ring1);
-    this.ring1.body.static = true;
-    this.ring1.body.clearShapes();
-    this.ring1.body.loadPolygon('physicsData', 'ring-1');
-    this.ring1.body.setMaterial(worldMaterial);
+    if (!this.config.empty) {
+      this.ring1 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-1');
+      this.ring1.anchor.setTo(0.5);
+      this.physics.p2.enable(this.ring1);
+      this.ring1.body.static = true;
+      this.ring1.body.clearShapes();
+      this.ring1.body.loadPolygon('physicsData', 'ring-1');
+      this.ring1.body.setMaterial(worldMaterial);
 
-    this.ring2 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-2');
-    this.ring2.anchor.setTo(0.5);
-    this.physics.p2.enable(this.ring2);
-    this.ring2.body.static = true;
-    this.ring2.body.clearShapes();
-    this.ring2.body.loadPolygon('physicsData', 'ring-2');
-    this.ring2.body.setMaterial(worldMaterial);
-    this.ring2.body.angle = 90;
+      this.ring2 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-2');
+      this.ring2.anchor.setTo(0.5);
+      this.physics.p2.enable(this.ring2);
+      this.ring2.body.static = true;
+      this.ring2.body.clearShapes();
+      this.ring2.body.loadPolygon('physicsData', 'ring-2');
+      this.ring2.body.setMaterial(worldMaterial);
+      this.ring2.body.angle = 90;
 
-    this.ring3 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-3');
-    this.ring3.anchor.setTo(0.5);
-    this.physics.p2.enable(this.ring3);
-    this.ring3.body.static = true;
-    this.ring3.body.clearShapes();
-    this.ring3.body.loadPolygon('physicsData', 'ring-3');
-    this.ring3.body.setMaterial(worldMaterial);
-    this.ring3.body.angle = -90;
+      this.ring3 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-3');
+      this.ring3.anchor.setTo(0.5);
+      this.physics.p2.enable(this.ring3);
+      this.ring3.body.static = true;
+      this.ring3.body.clearShapes();
+      this.ring3.body.loadPolygon('physicsData', 'ring-3');
+      this.ring3.body.setMaterial(worldMaterial);
+      this.ring3.body.angle = -90;
 
-    this.ring4 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-4');
-    this.ring4.anchor.setTo(0.5);
-    this.physics.p2.enable(this.ring4);
-    this.ring4.body.static = true;
-    this.ring4.body.clearShapes();
-    this.ring4.body.loadPolygon('physicsData', 'ring-4');
-    this.ring4.body.setMaterial(worldMaterial);
-    this.ring4.body.angle = 360;
+      this.ring4 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-4');
+      this.ring4.anchor.setTo(0.5);
+      this.physics.p2.enable(this.ring4);
+      this.ring4.body.static = true;
+      this.ring4.body.clearShapes();
+      this.ring4.body.loadPolygon('physicsData', 'ring-4');
+      this.ring4.body.setMaterial(worldMaterial);
+      this.ring4.body.angle = 360;
 
-    this.ring5 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-5');
-    this.ring5.anchor.setTo(0.5);
-    this.physics.p2.enable(this.ring5);
-    this.ring5.body.static = true;
-    this.ring5.body.clearShapes();
-    this.ring5.body.loadPolygon('physicsData', 'ring-5');
-    this.ring5.body.setMaterial(worldMaterial);
-    this.ring5.body.angle = 180;
+      this.ring5 = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-5');
+      this.ring5.anchor.setTo(0.5);
+      this.physics.p2.enable(this.ring5);
+      this.ring5.body.static = true;
+      this.ring5.body.clearShapes();
+      this.ring5.body.loadPolygon('physicsData', 'ring-5');
+      this.ring5.body.setMaterial(worldMaterial);
+      this.ring5.body.angle = 180;
+    }
 
     this.ball = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ball');
     this.ball.anchor.setTo(0.5);
@@ -131,7 +133,7 @@ BasicGame.Menu.prototype = {
   init: function(config) {
     if (!config) {
       config = {
-
+        empty: false
       };
     }
 
@@ -139,6 +141,14 @@ BasicGame.Menu.prototype = {
   },
 
   create: function() {
+
+    this.start = this.add.button(game.width * 0.5, game.height * 0.5 - 50, 'start', this.startClick, this);
+    this.start.anchor.set(0.5);
+    this.start.input.useHandCursor = true;
+
+    this.startEmpty = this.add.button(game.width * 0.5, game.height * 0.5 + 50, 'start-empty', this.startClickEmpty, this);
+    this.startEmpty.anchor.set(0.5);
+    this.startEmpty.input.useHandCursor = true;
 
   },
 
@@ -148,6 +158,13 @@ BasicGame.Menu.prototype = {
 
   startClick: function() {
 
+    this.state.start('Game', true, false, this.config);
+
+  },
+
+  startClickEmpty: function() {
+
+    this.config.empty = true;
     this.state.start('Game', true, false, this.config);
 
   },
@@ -184,6 +201,9 @@ BasicGame.Preload.prototype = {
     this.load.image('ring-4', 'res/ring-4.png');
     this.load.image('ring-5', 'res/ring-5.png');
 
+    this.load.image('start', 'res/start.png');
+    this.load.image('start-empty', 'res/start-empty.png');
+
     this.load.physics('physicsData', 'res/sprites.json');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
@@ -199,8 +219,7 @@ BasicGame.Preload.prototype = {
   update: function() {
 
     if (this.ready) {
-      // this.state.start('Menu');
-      this.state.start('Game');
+      this.state.start('Menu');
     }
 
   },
