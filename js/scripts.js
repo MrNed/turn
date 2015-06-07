@@ -155,6 +155,14 @@ BasicGame.Preload.prototype = {
   }
 
 };
+window.addEventListener('orientationchange', function () {
+
+  if (window.innerHeight > window.innerWidth) {
+    document.getElementsByTagName('body').style.transform = "rotate(90deg)";
+  }
+
+});
+
 var game = new Phaser.Game(300, 420, Phaser.Canvas, 'game_cont');
 
 game.state.add('Boot', BasicGame.Boot);
