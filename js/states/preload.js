@@ -22,7 +22,10 @@ BasicGame.Preload.prototype = {
     this.preloadBar.animations.add('loading', preloaderFrames, 60, true);
     this.preloadBar.play('loading');
 
-    this.load.image("player","res/player.png");
+    this.load.image('ball', 'res/ball.png');
+    this.load.image('ring-1', 'res/ring-1.png');
+
+    this.load.physics('physicsData', 'res/sprites.json');
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 

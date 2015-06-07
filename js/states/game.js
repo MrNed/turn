@@ -1,5 +1,7 @@
 BasicGame.Game = function(game) {
 
+  this.ball = null;
+
 };
 
 BasicGame.Game.prototype = {
@@ -9,26 +11,35 @@ BasicGame.Game.prototype = {
     this.config = config;
 
     game.renderer.renderSession.roundPixels = true;
-    this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.physics.startSystem(Phaser.Physics.P2JS);
+    this.physics.p2.gravity.y = 300;
 
   },
 
   create: function() {
 
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    game.scale.setScreenSize(true);
+    var spriteMaterial = this.physics.p2.createMaterial('spriteMaterial');
+    var worldMaterial = this.physics.p2.createMaterial('worldMaterial');
+    var contactMaterial = this.physics.p2.createContactMaterial(spriteMaterial, worldMaterial, { restitution: 1.0 });
 
-    player = this.add.sprite(160,240,"player");
-    player.anchor.setTo(0.5);
-    game.physics.enable(player, Phaser.Physics.ARCADE);
-    player.body.collideWorldBounds = true;
-    player.body.bounce.set(0.8);
+    this.physics.p2.setWorldMaterial(worldMaterial);
+
+
+    this.ball = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ball');
+    this.ball.anchor.setTo(0.5);
+
+    this.physics.p2.enable(this.ball);
+    this.ball.body.setCircle(16);
+    this.ball.restitution = 1.0;
+
+    this.ball.body.setMaterial(spriteMaterial);
+
+    var self = this;
+
     gyro.frequency = 10;
     gyro.startTracking(function(o) {
-      player.body.velocity.y += o.beta/20;
-      player.body.velocity.x += o.gamma/20;
+      self.ball.body.velocity.y += o.beta / 20;
+      self.ball.body.velocity.x += o.gamma / 20;
     });
 
   },
