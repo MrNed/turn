@@ -54,14 +54,18 @@ BasicGame.Game.prototype = {
 
     this.physics.p2.setWorldMaterial(worldMaterial);
 
+    this.stage = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ring-1');
+    this.stage.anchor.setTo(0.5);
+    this.physics.p2.enable(this.stage);
+    this.stage.body.static = true;
+    this.stage.body.clearShapes();
+    this.stage.body.loadPolygon('physicsData', 'ring-1');
+    this.stage.body.setMaterial(worldMaterial);
 
     this.ball = this.add.sprite(game.width * 0.5, game.height * 0.5, 'ball');
     this.ball.anchor.setTo(0.5);
-
     this.physics.p2.enable(this.ball);
     this.ball.body.setCircle(16);
-    this.ball.restitution = 1.0;
-
     this.ball.body.setMaterial(spriteMaterial);
 
     var self = this;
