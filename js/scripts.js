@@ -42,7 +42,7 @@ BasicGame.Game.prototype = {
 
     game.renderer.renderSession.roundPixels = true;
     this.physics.startSystem(Phaser.Physics.P2JS);
-    this.physics.p2.gravity.y = 300;
+    // this.physics.p2.gravity.y = 300;
 
   },
 
@@ -50,7 +50,7 @@ BasicGame.Game.prototype = {
 
     var spriteMaterial = this.physics.p2.createMaterial('spriteMaterial');
     var worldMaterial = this.physics.p2.createMaterial('worldMaterial');
-    var contactMaterial = this.physics.p2.createContactMaterial(spriteMaterial, worldMaterial, { restitution: 1.0 });
+    var contactMaterial = this.physics.p2.createContactMaterial(spriteMaterial, worldMaterial, { restitution: 0.25 });
 
     this.physics.p2.setWorldMaterial(worldMaterial);
 
