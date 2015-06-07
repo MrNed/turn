@@ -24,6 +24,10 @@ BasicGame.Preload.prototype = {
 
     this.load.image('ball', 'res/ball.png');
     this.load.image('ring-1', 'res/ring-1.png');
+    this.load.image('ring-2', 'res/ring-2.png');
+    this.load.image('ring-3', 'res/ring-3.png');
+    this.load.image('ring-4', 'res/ring-4.png');
+    this.load.image('ring-5', 'res/ring-5.png');
 
     this.load.physics('physicsData', 'res/sprites.json');
 
