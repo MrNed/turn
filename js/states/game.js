@@ -10,7 +10,7 @@ BasicGame.Game.prototype = {
 
     this.config = config;
 
-    game.renderer.renderSession.roundPixels = true;
+    game.renderer.roundPixels = true;
     this.physics.startSystem(Phaser.Physics.P2JS);
 
   },
